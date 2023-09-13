@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">jaiApp</string>
+    <string name="user_since">You have been a user since: \n$%s</string>
+    <string name="welcome">Welcome: %$s</string>
+</resources>

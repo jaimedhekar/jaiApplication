@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "380057190906",
+    "firebase_url": "https://jai-on-mobile-default-rtdb.firebaseio.com",
+    "project_id": "jai-on-mobile",
+    "storage_bucket": "jai-on-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380057190906:android:908610d6ffcc12aef72443",
+        "android_client_info": {
+          "package_name": "com.example.jaiapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380057190906-8bljni32lji0djcb1i88bj32n301o27m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDS-D9_7jnTHzD2hkGWVFUG6kaXuqukhF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380057190906-8bljni32lji0djcb1i88bj32n301o27m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
