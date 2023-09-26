@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showHidePassword() {
         ImageView imageViewShowHidePwd = findViewById(R.id.ImageView_show_hide_pad);
-        imageViewShowHidePwd.setImageResource(R.drawable.visibility);
+        imageViewShowHidePwd.setImageResource(R.drawable.visibilityoff);
         imageViewShowHidePwd.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 if(editTextLoginPwd.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     imageViewShowHidePwd.setImageResource(R.drawable.visibilityOff);
                 } else {
                     editTextLoginPwd.setTransformationMethod((HideReturnsTransformationMethod.getInstance()));
-                    imageViewShowHidePwd.setImageResource(R.drawable.visibility);
+                    imageViewShowHidePwd.setImageResource(R.drawable.visibilityoff);
                 }
             }
         });

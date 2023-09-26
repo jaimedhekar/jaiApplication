@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -41,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
         showHidePassword();
 
-        TextView textViewRegister = findViewById(R.id.textView_register);
-        textViewRegister.setOnClickListener(new View.OnClickListener() {
+        Button buttonRegister = findViewById(R.id.button_link_to_register);
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent registerActivity = new Intent(MainActivity.this, RegisterActivity.class);
@@ -81,23 +80,34 @@ public class MainActivity extends AppCompatActivity {
         auth.signInWithEmailAndPassword(textEmail, textPassword).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                
+                if(task.isSuccessful()){
+                    Toast.makeText(MainActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    Intent userProfile = new Intent(MainActivity.this, UserProfile.class);
+                    startActivity(userProfile);
+                }else{
+                    try{
+                        throw task.getException();
+                    }catch(Exception e){
+                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
 
     private void showHidePassword() {
         ImageView imageViewShowHidePad = findViewById(R.id.ImageView_show_hide_pad);
-        imageViewShowHidePad.setImageResource(R.drawable.visibility2);
+        imageViewShowHidePad.setImageResource(R.drawable.visibilityoff);
         imageViewShowHidePad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editTextLoginPad.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
                     editTextLoginPad.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    imageViewShowHidePad.setImageResource(R.drawable.visibility2);
+                    imageViewShowHidePad.setImageResource(R.drawable.visibilityoff);
                 } else {
                     editTextLoginPad.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    imageViewShowHidePad.setImageResource(R.drawable.visibilityOff);
+                    imageViewShowHidePad.setImageResource(R.drawable.visibilityon);
                 }
             }
 

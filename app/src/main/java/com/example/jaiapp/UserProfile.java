@@ -36,6 +36,7 @@ public class UserProfile extends AppCompatActivity {
         getSupportActionBar().setTitle("Home");
         findViews();
         signOut();
+        updateInfo();
 
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
@@ -45,7 +46,7 @@ public class UserProfile extends AppCompatActivity {
         }else{
             Toast.makeText(UserProfile.this, "User Not Found", Toast.LENGTH_SHORT);
         }
-
+        progressBar.setVisibility(View.GONE);
     }
 
     private void showUserProfile(FirebaseUser firebaseUser) {
@@ -73,6 +74,18 @@ public class UserProfile extends AppCompatActivity {
                 mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainActivity);
 
+            }
+        });
+    }
+
+    private void updateInfo() {
+        Button buttonUpdateInfo = findViewById(R.id.button_update);
+        buttonUpdateInfo.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent updateInformation = new Intent(UserProfile.this, UpdateScreen.class);
+                updateInformation.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(updateInformation);
             }
         });
     }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:theme="@style/Theme.AppCompat.Light"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UpdateScreen"
     android:background="@drawable/back">
 
     <LinearLayout
@@ -15,7 +14,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Up Now!"
+            android:text="Update your Information"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:gravity="center"
             android:textColor="@color/purple_700"
@@ -33,7 +32,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/editText_register_fname"
+                android:id="@+id/editText_update_fname"
                 android:hint="First Name"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
@@ -44,9 +43,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/editText_register_lname"
+                android:id="@+id/editText_update_lname"
                 android:hint="Last Name"
-                android:layout_below="@id/editText_register_fname"
+                android:layout_below="@id/editText_update_fname"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -56,9 +55,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/editText_register_email"
-                android:hint="Email"
-                android:layout_below="@id/editText_register_lname"
+                android:id="@+id/editText_update_email"
+                android:hint="New Email"
+                android:layout_below="@id/editText_update_lname"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -68,9 +67,9 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/editText_register_pad"
-                android:hint="Password"
-                android:layout_below="@id/editText_register_email"
+                android:id="@+id/editText_update_pad"
+                android:hint="New Password"
+                android:layout_below="@id/editText_update_email"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
@@ -78,37 +77,24 @@
                 android:inputType="text"/>
 
             <Button
-                android:id="@+id/button_register"
+                android:id="@+id/button_updateInfo"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editText_register_pad"
+                android:layout_below="@id/editText_update_pad"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="@color/spacePurple"
-                android:text="Sign Up"
+                android:text="Update Info"
                 android:textColor="@color/black" />
 
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@id/progressbar"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:visibility="gone"/>
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/ImageView_show_hide_pad"
-                android:layout_below="@id/editText_register_email"
-                android:layout_marginTop="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25dp"/>
 
 
 
 
         </RelativeLayout>
+
+
+
 
 
 

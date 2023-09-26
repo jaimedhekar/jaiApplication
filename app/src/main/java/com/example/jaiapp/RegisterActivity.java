@@ -48,8 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String textEmail = editTextRegisterEmail.getText().toString();
-                String textPwd = editTextRegisterPwd.getText().toString();
+                String textEmail = editTextRegisterEmail.getText().toString().trim();
+                String textPwd = editTextRegisterPwd.getText().toString().trim();
                 String textFName = editTextRegisterFirstName.getText().toString();
                 String textLName = editTextRegisterLastName.getText().toString();
 
@@ -74,6 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }else{
                     progressBar.setVisibility(View.VISIBLE);
                     registerUser(textEmail, textFName, textLName, textPwd);
+
+
             }
         };
 
@@ -98,6 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textFName + " " + textLName).build();
                     firebaseUser.updateProfile(profileUpdates);
                     Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
+                    writeNewUser(textEmail, textFName);
                     // Opens the UserProfileActivity after the user has been created
                     Intent userProfileActivity = new Intent(RegisterActivity.this, UserProfile.class);
                     // Stops the user from going back to the register screen
@@ -123,24 +126,24 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        View editTextRegisterEmail = findViewById(R.id.editText_register_email);
-        View editTextRegisterPwd = findViewById(R.id.editText_register_pad);
-        View editTextRegisterFirstName = findViewById(R.id.editText_register_fname);
+        editTextRegisterEmail = findViewById(R.id.editText_register_email);
+        editTextRegisterPwd = findViewById(R.id.editText_register_pad);
+        editTextRegisterFirstName = findViewById(R.id.editText_register_fname);
         editTextRegisterLastName = findViewById(R.id.editText_register_lname);
         progressBar = findViewById(R.id.progressbar);
     }
 
     private void showHidePassword() {
         ImageView imageViewShowHidePwd = findViewById(R.id.ImageView_show_hide_pad);
-        imageViewShowHidePwd.setImageResource(R.drawable.visibility);
+        imageViewShowHidePwd.setImageResource(R.drawable.visibilityoff);
         imageViewShowHidePwd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (editTextRegisterPwd.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())) {
                     editTextRegisterPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    imageViewShowHidePwd.setImageResource(R.drawable.visibilityOff);
+                    imageViewShowHidePwd.setImageResource(R.drawable.visibilityoff);
                 } else {
                     editTextRegisterPwd.setTransformationMethod((HideReturnsTransformationMethod.getInstance()));
-                    imageViewShowHidePwd.setImageResource(R.drawable.visibility);
+                    imageViewShowHidePwd.setImageResource(R.drawable.visibilityoff);
                 }
     }
 
