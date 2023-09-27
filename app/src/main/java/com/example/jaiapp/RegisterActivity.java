@@ -100,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textFName + " " + textLName).build();
                     firebaseUser.updateProfile(profileUpdates);
                     Toast.makeText(RegisterActivity.this, "Registration Successful!", Toast.LENGTH_SHORT).show();
-                    writeNewUser(textEmail, textFName);
+                    writeNewUser(textEmail, textFName, textPwd);
                     // Opens the UserProfileActivity after the user has been created
                     Intent userProfileActivity = new Intent(RegisterActivity.this, UserProfile.class);
                     // Stops the user from going back to the register screen
@@ -120,9 +120,10 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void writeNewUser(String textEmail, String textFname){
-        User user = new User(textFname, textEmail);
-        database.child("users").child(""+user.getID()).setValue(user);
+    private void writeNewUser(String textEmail, String textFname, String textPassword){
+        User user = new User(textFname, textEmail, textPassword);
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        database.child("users").child(firebaseUser.getUid()).setValue(user);
     }
 
     private void findViews() {

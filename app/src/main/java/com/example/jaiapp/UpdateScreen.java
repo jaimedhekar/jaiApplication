@@ -9,14 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,9 +26,6 @@ public class UpdateScreen extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_screen);
         findViews();
-
-
-
         Button buttonUpdating = findViewById(R.id.button_updateInfo);
         buttonUpdating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,56 +54,22 @@ public class UpdateScreen extends Activity {
                     editTextUpdatePassword.setError("A valid password is required!");
                     editTextUpdatePassword.requestFocus();
                 } else {
-                    updateUser(textEmail, textFName, textLName, textPwd);
-                }
-            }
-
-            ;
-
-
-        });
-
-
-    }
-
-    private void updateUser(String textEmail, String textFName, String textLName, String textPwd) {
-        auth = FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword(textEmail, textPwd).addOnCompleteListener(UpdateScreen.this , new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                // Check to see if the user was completely successfully
-                FirebaseUser firebaseUser = null;
-                if(task.isSuccessful()){
-                    firebaseUser = auth.getCurrentUser();
-                }
-                if (firebaseUser != null){
-                    // Update display name of the user
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(textFName + " " + textLName).build();
-                    firebaseUser.updateProfile(profileUpdates);
-                    Toast.makeText(UpdateScreen.this, "Update Successful!", Toast.LENGTH_SHORT).show();
-                    writeUpdate(firebaseUser);
-                    // Opens the UserProfileActivity after the user has been created
-                    Intent userProfileActivity = new Intent(UpdateScreen.this, UserProfile.class);
-                    // Stops the user from going back to the register screen
-                    userProfileActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(userProfileActivity);
-                    finish();
-                } else {
-                    // Handle the exceptions
-                    try{
-                        throw task.getException();
-                    } catch (Exception e){
-                        Toast.makeText(UpdateScreen.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-
+                    writeUpdate(textFName+" "+textLName, textEmail, textPwd);
                 }
             }
         });
     }
 
-    private void writeUpdate(FirebaseUser newU){
-        FirebaseUser user = newU;
-        database.child("users").child(""+user.getUid()).setValue(user);
+    private void writeUpdate(String uName, String email, String password){
+        FirebaseUser user = auth.getCurrentUser();
+        database.child("users").child(user.getUid()).child("userName").setValue(uName);
+        database.child("users").child(user.getUid()).child("email").setValue(email);
+        database.child("users").child(user.getUid()).child("password").setValue(password);
+        Intent userProfileActivity = new Intent(UpdateScreen.this, UserProfile.class);
+        // Stops the user from going back to the register screen
+        userProfileActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(userProfileActivity);
+        finish();
     }
 
     private void findViews() {
