@@ -134,6 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbar);
     }
 
+
     private void showHidePassword() {
         ImageView imageViewShowHidePwd = findViewById(R.id.ImageView_show_hide_pad);
         imageViewShowHidePwd.setImageResource(R.drawable.visibilityoff);
